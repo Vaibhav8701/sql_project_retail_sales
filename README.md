@@ -45,10 +45,19 @@ CREATE TABLE retail_sales
 - **Category Count**: Identify all unique product categories in the dataset.
 - **Null Value Check**: Check for any null values in the dataset and delete records with missing data.
 
+--> DATA EXPLORATON..
+-------------------------------------------------------------------------
 ```sql
-SELECT COUNT(*) FROM retail_sales;
-SELECT COUNT(DISTINCT customer_id) FROM retail_sales;
-SELECT DISTINCT category FROM retail_sales;
+--1.how many sales we have
+select count(sale_date)as total_sale from retails_sales;
+
+--2.how many unique customers we have
+select count(distinct customer_id)as total_customer 
+from retails_sales;
+
+--3.select category
+select distinct category from retails_sales;
+
 
 SELECT * FROM retail_sales
 WHERE 
@@ -116,7 +125,7 @@ WHERE total_sale > 1000
 SELECT 
     category,
     gender,
-    COUNT(*) as total_trans
+    COUNT(transactions_id) as total_number
 FROM retail_sales
 GROUP 
     BY 
@@ -166,7 +175,7 @@ GROUP BY category
 
 10. **Write a SQL query to create each shift and number of orders (Example Morning <12, Afternoon Between 12 & 17, Evening >17)**:
 ```sql
-WITH hourly_sale
+
 AS
 (
 SELECT *,
@@ -177,10 +186,6 @@ SELECT *,
     END as shift
 FROM retail_sales
 )
-SELECT 
-    shift,
-    COUNT(*) as total_orders    
-FROM hourly_sale
-GROUP BY shift
+
 ```
 
